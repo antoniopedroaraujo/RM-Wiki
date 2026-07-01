@@ -6,7 +6,7 @@ function Navbar() {
   const { favorites } = useFavorites();  
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">
           Rick and Morty

@@ -1,3 +1,13 @@
+body {
+  padding-top: 76px;
+}
+
+.navbar {
+  width: 100%;
+  z-index: 1050;
+  min-height: 76px;
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
