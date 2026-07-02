@@ -10,17 +10,19 @@ function Personagens() {
   const [search, setSearch] = useState("");
   const [searchName, setSearchName] = useState("");
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); 
   const searchInputRef = useRef(null);
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  async function getCharacters() {
+  useEffect(() => {
 
-    try {
+    async function getCharacters() {
 
     setLoading(true);
+
+    try {
 
     let url = `https://rickandmortyapi.com/api/character?page=${page}`;
 
@@ -43,9 +45,7 @@ function Personagens() {
 
     }
 
-
       const data = await response.json();
-
 
       setCharacters(data.results);
       setTotalPages(data.info.pages);
@@ -62,9 +62,6 @@ function Personagens() {
 
   }
 
-
-  useEffect(() => {
-
     getCharacters();
 
   }, [page, status, searchName]);
@@ -77,19 +74,6 @@ function Personagens() {
 
   }
     }, []);
-
-
-
-  /*useEffect(() => {
-
-    axios
-      .get("https://rickandmortyapi.com/api/character")
-      .then((response) => {
-        setCharacters(response.data.results);
-      });
-
-  }, []);*/
-
 
   function toggleFavorite(character) {
     const exists = favorites.some(
@@ -126,9 +110,6 @@ function Personagens() {
 
   }
 
-
-
-
   function previousPage(){
 
     if(page > 1){
@@ -139,71 +120,15 @@ function Personagens() {
 
   }
 
+  if (loading) {
+  return (
+    <div className="text-center mt-5">
+      <div className="spinner-border text-primary" />
+      <p>Carregando...</p>
+    </div>
+  );
+}
 
-    /*const alreadyFavorite = favorites.some(
-      (fav) => fav.id === character.id
-    );
-
-
-    if (alreadyFavorite) {
-
-      setFavorites(
-        favorites.filter(
-          (fav) => fav.id !== character.id
-        )
-      );
-
-    } else {
-
-      setFavorites([
-        ...favorites,
-        character
-      ]);
-
-    }
-  }*/
-
-    /*return (
-
-    <div className="container mt-4">
-
-      <h1 className="mb-4">
-        Personagens
-      </h1>
-
-
-      {loading && (
-        <div className="text-center">
-          <div className="spinner-border text-primary"></div>
-        </div>
-      )}
-
-
-
-      <div className="row">
-
-        {characters.map((character) => (
-
-          <PersonagemCard
-
-            key={character.id}
-
-            character={character}
-
-            favorites={[]}
-
-            toggleFavorite={() => {}}
-
-          />
-
-        ))}
-
-      </div>
-
-
-    </div> 
-
-  );*/
   return (
     <div className="container mt-4">
 

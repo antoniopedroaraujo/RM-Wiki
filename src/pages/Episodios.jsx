@@ -9,7 +9,9 @@ function Episodios() {
   const [totalPages, setTotalPages] = useState(1);
   const [season, setSeason] = useState("");
 
-  async function getEpisodes() {
+  
+  useEffect(()=>{
+    async function getEpisodes() {
 
     try {
 
@@ -40,10 +42,7 @@ function Episodios() {
       console.log(error);
     }
 
-
   }
-
-  useEffect(()=>{
 
     getEpisodes();
   },[page, season]);

@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { useFavorites } from "../context/FavoritosContext";
+import { useFavorites } from "../context/useFavorites";
 
 function Navbar() {
 

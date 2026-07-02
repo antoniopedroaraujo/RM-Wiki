@@ -1,5 +1,4 @@
-import React from "react";
-import { useFavorites } from "../context/FavoritosContext";
+import { useFavorites } from "../context/useFavorites";
 
 function PersonagemCard({ character }) {
     const {

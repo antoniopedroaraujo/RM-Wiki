@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import LocalizacaoCard from "../components/LocalizacaoCard";
 
-
 function Localizacoes() {
 
   const [locations, setLocations] = useState([]);
@@ -9,7 +8,8 @@ function Localizacoes() {
   const [totalPages, setTotalPages] = useState(1);
   const [type, setType] = useState("");
 
-  async function getLocations() {
+  useEffect(()=>{
+    async function getLocations() {
 
     try {
 
@@ -41,10 +41,8 @@ function Localizacoes() {
       );
     }
   }
-
-  useEffect(()=>{
-
-        getLocations();
+  
+  getLocations();
     },[page,type]);
 
   return (

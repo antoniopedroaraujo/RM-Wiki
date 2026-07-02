@@ -1,5 +1,5 @@
 import PersonagemCard from "../components/PersonagemCard";
-import { useFavorites } from "../context/FavoritosContext";
+import { useFavorites } from "../context/useFavorites";
 
 
 function Favoritos(){
