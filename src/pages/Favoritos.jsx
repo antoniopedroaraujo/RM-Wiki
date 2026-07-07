@@ -19,7 +19,7 @@ function Favoritos(){
 
       favorites.length === 0 ? (
         <div className="alert alert-info mt-4">
-          Você ainda não tem favoritos
+          Você ainda não adicionou nenhum personagem aos favoritos
         </div>
       ) : (
         <div className="row mt-4">

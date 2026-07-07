@@ -7,15 +7,28 @@ function Localizacoes() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(()=>{
     async function getLocations() {
+    
+      setLoading(true);
+      setError("");
 
     try {
 
       const response = await fetch(
         `https://rickandmortyapi.com/api/location?page=${page}`
       );
+
+      if (!response.ok) {
+        setLocations([]);
+        setTotalPages(1);
+        setError("Não foi possível carregar as localizações.");
+
+        return;
+      }
 
       const data = await response.json();
 
@@ -35,15 +48,25 @@ function Localizacoes() {
 
     } catch(error) {
 
-      console.log(
-        "Erro ao buscar localizações:",
-        error
-      );
-    }
+      console.log("Erro ao buscar localizações:",error);
+      setError("Ocorreu um erro ao buscar as localizações. Tente novamente.");
+
+    } finally {
+        setLoading(false);
+    } 
   }
   
   getLocations();
     },[page,type]);
+  
+  if (loading) {
+  return (
+    <div className="text-center mt-5">
+      <div className="spinner-border text-primary" />
+      <p>Carregando...</p>
+    </div>
+    );
+  }
 
   return (
 
@@ -91,8 +114,24 @@ function Localizacoes() {
         </div>
       </div>
 
+      {error && (
+
+      <div className="alert alert-danger mt-4">
+        {error}
+      </div>
+
+      )}
+
       {/* CARDS */}
 
+      {
+      locations.length === 0 && !error ? (
+
+        <div className="alert alert-info mt-4">
+          Nenhuma localização foi encontrada.
+        </div>
+
+      ) : (
       <div className="row">
 
         {locations.map((location)=>(
@@ -104,6 +143,8 @@ function Localizacoes() {
           />
         ))}
       </div>
+      )
+    }
 
       {/* PAGINAÇÃO */}
 

@@ -4,12 +4,12 @@ import PersonagemCard from "../components/PersonagemCard";
 function Personagens() {
 
   const [characters, setCharacters] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [status, setStatus] = useState("");
 
   const [search, setSearch] = useState("");
   const [searchName, setSearchName] = useState("");
 
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); 
   const searchInputRef = useRef(null);
 
@@ -21,6 +21,7 @@ function Personagens() {
     async function getCharacters() {
 
     setLoading(true);
+    setError("");
 
     try {
 
@@ -40,9 +41,9 @@ function Personagens() {
 
       setCharacters([]);
       setTotalPages(1);
+      setError("Não foi possível carregar os personagens.");
 
       return;
-
     }
 
       const data = await response.json();
@@ -53,6 +54,7 @@ function Personagens() {
     } catch (error) {
 
       console.log("Erro ao buscar personagens:", error);
+      setError("Ocorreu um erro ao buscar os personagens. Tente novamente.");
 
     } finally {
 
@@ -74,31 +76,6 @@ function Personagens() {
 
   }
     }, []);
-
-  function toggleFavorite(character) {
-    const exists = favorites.some(
-      (fav) => fav.id === character.id
-    );
-
-
-    if (exists) {
-
-      setFavorites(
-        favorites.filter(
-          (fav) => fav.id !== character.id
-        )
-      );
-
-    } else {
-
-      setFavorites([
-        ...favorites,
-        character
-      ]);
-
-    }
-
-  }
 
   function nextPage(){
 
@@ -226,7 +203,24 @@ function Personagens() {
 
 </div>
 
-      {/*CARDS*/}
+{error && (
+
+  <div className="alert alert-danger mt-4">
+    {error}
+  </div>
+
+  )}
+
+{/*CARDS*/}
+
+  {
+  characters.length === 0 && !error ? (
+
+    <div className="alert alert-info mt-4">
+      Nenhum personagem foi encontrado.
+    </div>
+
+  ) : (
 
       <div className="row">
 
@@ -235,12 +229,13 @@ function Personagens() {
           <PersonagemCard
             key={character.id}
             character={character}
-            toggleFavorite={toggleFavorite}
           />
 
         ))}
 
       </div>
+    )
+  }
 
       {/* PAGINAÇÃO */}
 
