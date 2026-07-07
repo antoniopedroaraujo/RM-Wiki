@@ -19,6 +19,22 @@ function PersonagemCard({ character }) {
     }
   };
 
+  const getStatusText = (status) => {
+    switch (status) {
+      case "Alive":
+        return "Vivo";
+
+      case "Dead":
+        return "Morto";
+
+      case "unknown":
+        return "Desconhecido";
+
+      default:
+        return status;
+    }
+  };
+
   return (
     <div className="col-md-6 col-lg-3 mb-4">
       <div className="card h-100 shadow-sm">
@@ -35,7 +51,7 @@ function PersonagemCard({ character }) {
           <p className="card-text">
             <strong>Status:</strong>{" "}
             <span className={`badge ${getStatusBadge(character.status)}`}>
-              {character.status}
+              {getStatusText(character.status)}
             </span>
           </p>
           <button
