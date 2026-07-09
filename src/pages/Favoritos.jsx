@@ -12,7 +12,7 @@ function Favoritos(){
   return (
 
     <div className="container mt-4">
-      <h1>
+      <h1 className="page-title">
         Favoritos
       </h1>
       {

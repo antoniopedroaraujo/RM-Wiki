@@ -109,7 +109,7 @@ function Personagens() {
   return (
     <div className="container mt-4">
 
-    <h1>
+    <h1 className="page-title">
         Personagens
     </h1>
 
@@ -140,7 +140,7 @@ function Personagens() {
       />
 
       <button
-        className="btn btn-primary"
+        className="btn btn-primary btn-cartoon"
 
         onClick={() => {
 
@@ -244,7 +244,7 @@ function Personagens() {
   <div className="d-flex justify-content-center align-items-center gap-3">
 
     <button
-      className="btn btn-outline-primary"
+      className="btn btn-outline-primary btn-cartoon"
       onClick={previousPage}
       disabled={page === 1}
     >
@@ -258,7 +258,7 @@ function Personagens() {
 
 
     <button
-      className="btn btn-outline-primary"
+      className="btn btn-outline-primary btn-cartoon"
       onClick={nextPage}
       disabled={page === totalPages}
     >
