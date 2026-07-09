@@ -8,8 +8,8 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
-          Rick and Morty
+        <Link className="navbar-brand fw-bold logo" to="/">
+          Rick&Morty Wiki
         </Link>
         <button
           className="navbar-toggler"

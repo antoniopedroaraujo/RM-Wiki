@@ -3,7 +3,7 @@ function EpisodioCard({ episode }) {
   return (
 
     <div className="col-md-6 col-lg-4 mb-4">
-      <div className="card h-100 shadow">
+      <div className="card h-100 shadow cartoon-card">
         <div className="card-body">
           <h5 className="card-title">
             {episode.name}

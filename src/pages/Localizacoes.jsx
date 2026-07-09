@@ -71,7 +71,7 @@ function Localizacoes() {
   return (
 
     <div className="container mt-4">
-      <h1>
+      <h1 className="page-title">
         Localizações
       </h1>
       
@@ -151,7 +151,7 @@ function Localizacoes() {
       <div className="d-flex justify-content-center align-items-center gap-3 my-4">
         <button
 
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary btn-cartoon"
           disabled={page === 1}
           onClick={()=>setPage(page - 1)}
         >
@@ -162,7 +162,7 @@ function Localizacoes() {
         </strong>
         <button
 
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary btn-cartoon"
           disabled={page === totalPages}
           onClick={()=>setPage(page + 1)}
         >

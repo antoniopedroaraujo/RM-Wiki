@@ -37,7 +37,7 @@ function PersonagemCard({ character }) {
 
   return (
     <div className="col-md-6 col-lg-3 mb-4">
-      <div className="card h-100 shadow-sm">
+      <div className="card h-100 shadow-sm cartoon-card character-card">
         <img
           src={character.image}
           className="card-img-top"
@@ -55,7 +55,7 @@ function PersonagemCard({ character }) {
             </span>
           </p>
           <button
-            className={`btn mt-auto ${
+            className={`btn mt-auto btn-cartoon ${
               isFavorite ? "btn-danger mt-auto" : "btn-outline-danger mt-auto"
             }`}
             onClick={() => toggleFavorite(character)}
