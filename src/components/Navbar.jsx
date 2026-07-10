@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useFavorites } from "../context/useFavorites";
+import rickLogo from "../assets/rick.svg";
 
 function Navbar() {
 
@@ -9,7 +10,8 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
       <div className="container">
         <Link className="navbar-brand fw-bold logo" to="/">
-          Rick&Morty Wiki
+        <img src={rickLogo} alt="Ícone" className="logo-icon" />
+          Rick & Morty Wiki
         </Link>
         <button
           className="navbar-toggler"
@@ -32,6 +34,7 @@ function Navbar() {
                 }
               >
                 Personagens
+                <img width="48" height="48" src="https://img.icons8.com/plasticine/100/morty-smith.png" alt="morty-smith"/>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -42,6 +45,7 @@ function Navbar() {
                 }
               >
                 Episódios
+                <img width="48" height="48" src="https://img.icons8.com/3d-fluency/94/tv.png" alt="tv"/>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -52,6 +56,7 @@ function Navbar() {
                 }
               >
                 Localizações
+                <img width="48" height="48" src="https://img.icons8.com/color/48/earth-planet--v1.png" alt="earth-planet--v1"/>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -62,6 +67,7 @@ function Navbar() {
                 }
               >
                 Favoritos
+                <img width="48" height="48" src="https://img.icons8.com/plasticine/100/plambus.png" alt="plambus" />
                 {favorites.length > 0 && (
                     <span className="badge bg-danger ms-2">
                         {favorites.length}

@@ -79,6 +79,7 @@ function Episodios() {
       <h1 className="page-title">
         Episódios
       </h1>
+      <p>Todos os episódios do universo Rick and Morty</p>
       {/* FILTRO */}
 
       <div className="row mb-4">
