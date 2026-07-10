@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import EpisodioCard from "../components/EpisodioCard";
-
+import Loading from "../components/Loading";
+import Paginacao from "../components/Paginacao";
 
 function Episodios() {
 
@@ -65,12 +66,7 @@ function Episodios() {
   },[page, season]);
 
   if (loading) {
-  return (
-    <div className="text-center mt-5">
-      <div className="spinner-border text-primary" />
-      <p>Carregando...</p>
-    </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -150,29 +146,11 @@ function Episodios() {
       </div>
       )
     }
-      {/* PAGINAÇÃO */}
-
-      <div className="d-flex justify-content-center align-items-center gap-3 my-4">
-        <button
-
-          className="btn btn-outline-primary btn-cartoon"
-          disabled={page === 1}
-          onClick={()=>setPage(page-1)}
-        >
-          ← Anterior
-        </button>
-        <strong>
-          Página {page} de {totalPages}
-        </strong>
-        <button
-
-          className="btn btn-outline-primary btn-cartoon"
-          disabled={page === totalPages}
-          onClick={()=>setPage(page+1)}
-        >
-          Próxima →
-        </button>
-      </div>
+      <Paginacao
+        page={page}
+        totalPages={totalPages}
+        setPage={setPage}
+      />
     </div>
   );
 }

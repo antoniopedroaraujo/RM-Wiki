@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import PersonagemCard from "../components/PersonagemCard";
+import Loading from "../components/Loading";
+import Paginacao from "../components/Paginacao";
 
 function Personagens() {
 
@@ -77,33 +79,8 @@ function Personagens() {
   }
     }, []);
 
-  function nextPage(){
-
-    if(page < totalPages){
-
-      setPage(page + 1);
-
-    }
-
-  }
-
-  function previousPage(){
-
-    if(page > 1){
-
-      setPage(page - 1);
-
-    }
-
-  }
-
   if (loading) {
-  return (
-    <div className="text-center mt-5">
-      <div className="spinner-border text-primary" />
-      <p>Carregando...</p>
-    </div>
-  );
+    return <Loading />;
 }
 
   return (
@@ -118,7 +95,6 @@ function Personagens() {
 
     <div className="row mb-4">
 
-
   <div className="col-md-6">
 
     <label className="form-label">
@@ -132,7 +108,7 @@ function Personagens() {
         ref={searchInputRef}
         type="text"
         className="form-control"
-        placeholder="Digite o nome..."
+        placeholder="Buscar por nome..."
         value={search}
 
         onChange={(e) =>
@@ -238,37 +214,12 @@ function Personagens() {
     )
   }
 
-      {/* PAGINAÇÃO */}
+<Paginacao
+  page={page}
+  totalPages={totalPages}
+  setPage={setPage}
+/>
 
-<nav className="mt-4">
-
-  <div className="d-flex justify-content-center align-items-center gap-3">
-
-    <button
-      className="btn btn-outline-primary btn-cartoon"
-      onClick={previousPage}
-      disabled={page === 1}
-    >
-      ← Página anterior
-    </button>
-
-
-    <span className="fw-bold">
-      Página {page} de {totalPages}
-    </span>
-
-
-    <button
-      className="btn btn-outline-primary btn-cartoon"
-      onClick={nextPage}
-      disabled={page === totalPages}
-    >
-      Próxima página →
-    </button>
-
-  </div>
-
-</nav>
     </div>
   );
 }
