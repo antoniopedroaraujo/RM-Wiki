@@ -24,7 +24,7 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="collapse navbar-collapse mobile-center-menu" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink
@@ -33,8 +33,8 @@ function Navbar() {
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
               >
-                Personagens
                 <img width="48" height="48" src="https://img.icons8.com/plasticine/100/morty-smith.png" alt="morty-smith"/>
+                Personagens
               </NavLink>
             </li>
             <li className="nav-item">
@@ -44,8 +44,8 @@ function Navbar() {
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
               >
-                Episódios
                 <img width="48" height="48" src="https://img.icons8.com/3d-fluency/94/tv.png" alt="tv"/>
+                Episódios
               </NavLink>
             </li>
             <li className="nav-item">
@@ -55,8 +55,8 @@ function Navbar() {
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
               >
-                Localizações
                 <img width="48" height="48" src="https://img.icons8.com/color/48/earth-planet--v1.png" alt="earth-planet--v1"/>
+                Localizações
               </NavLink>
             </li>
             <li className="nav-item">
@@ -66,8 +66,8 @@ function Navbar() {
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
               >
-                Favoritos
                 <img width="48" height="48" src="https://img.icons8.com/plasticine/100/plambus.png" alt="plambus" />
+                Favoritos
                 {favorites.length > 0 && (
                     <span className="badge bg-danger ms-2">
                         {favorites.length}
