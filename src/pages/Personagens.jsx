@@ -117,7 +117,7 @@ function Personagens() {
       />
 
       <button
-        className="btn btn-primary btn-cartoon"
+        className="btn btn-primary"
 
         onClick={() => {
 
