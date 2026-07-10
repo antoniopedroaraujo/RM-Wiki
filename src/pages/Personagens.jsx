@@ -112,6 +112,7 @@ function Personagens() {
     <h1 className="page-title">
         Personagens
     </h1>
+    <p>Explore todos os personagens do universo Rick and Morty</p>
 
     {/*BUSCA*/}
 

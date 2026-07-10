@@ -60,7 +60,7 @@ function PersonagemCard({ character }) {
             }`}
             onClick={() => toggleFavorite(character)}
           >
-            {isFavorite ? "❤️ Remover dos Favoritos" : "🤍 Favoritar"}
+            {isFavorite ? "❤️ Remover" : "🤍 Favoritar"}
           </button>
         </div>
       </div>

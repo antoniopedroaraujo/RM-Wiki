@@ -74,6 +74,7 @@ function Localizacoes() {
       <h1 className="page-title">
         Localizações
       </h1>
+      <p>Explore todos os lugares do universo Rick and Morty</p>
       
       {/* FILTRO */}
 
