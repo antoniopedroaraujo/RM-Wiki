@@ -18,7 +18,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
-      <div className="container">
+      <div className="container-fluid px-4">
         <Link className="navbar-brand fw-bold logo" to="/">
         <img src={rickLogo} alt="Ícone" className="logo-icon" />
           Rick & Morty Wiki
