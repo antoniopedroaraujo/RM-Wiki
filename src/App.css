@@ -4,7 +4,7 @@ body {
 
 .logo {
   font-family: "Bangers", cursive;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5vw, 2rem);
   -webkit-text-stroke:2px #111;
   letter-spacing:1.5px;
   transition:.3s;
@@ -43,7 +43,7 @@ body {
   z-index: 1050;
   min-height: 76px;
   background-color: #222235;
-  padding: 1rem;
+  padding: .5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
