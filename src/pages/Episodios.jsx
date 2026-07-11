@@ -78,41 +78,26 @@ function Episodios() {
       <p>Todos os episódios do universo Rick and Morty</p>
       {/* FILTRO */}
 
-      <div className="row mb-4">
-        <div className="col-md-4">
-          <label className="form-label">
-            Temporada
-          </label>
-          <select
-            className="form-select"
-            value={season}
-            onChange={(e)=>{
+    <div className="mb-4">
 
-              setSeason(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="">
-              Todas
-            </option>
-            <option value="1">
-              Temporada 1
-            </option>
-            <option value="2">
-              Temporada 2
-            </option>
-            <option value="3">
-              Temporada 3
-            </option>
-            <option value="4">
-              Temporada 4
-            </option>
-            <option value="5">
-              Temporada 5
-            </option>
-          </select>
-        </div>
-      </div>
+  <div className="d-flex flex-wrap gap-2 justify-content-center">
+    {["", "1", "2", "3", "4", "5"].map((item) => (
+      <button
+        key={item}
+        type="button"
+        className={`btn ${
+          season === item ? "btn-primary" : "btn-outline-primary"
+        }`}
+        onClick={() => {
+          setSeason(item);
+          setPage(1);
+        }}
+      >
+        {item === "" ? "Todas" : `T${item}`}
+      </button>
+    ))}
+  </div>
+</div>
 
     {error && (
 

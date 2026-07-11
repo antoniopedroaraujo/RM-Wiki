@@ -75,42 +75,43 @@ function Localizacoes() {
       
       {/* FILTRO */}
 
-      <div className="row mb-4">
-        <div className="col-md-4">
-          <label className="form-label">
-            Tipo
-          </label>
-          <select
+  <div className="mb-4">
 
-            className="form-select"
-            value={type}
-            onChange={(e)=>{
-
-              setType(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="">
-              Todos
-            </option>
-            <option value="Planet">
-              Planeta
-            </option>
-            <option value="Cluster">
-              Cluster
-            </option>
-            <option value="Space station">
-              Estação espacial
-            </option>
-            <option value="Microverse">
-              Microverso
-            </option>
-            <option value="TV">
-              TV
-            </option>
-          </select>
-        </div>
-      </div>
+  <div className="d-flex flex-wrap gap-2 justify-content-center">
+    {[
+      "",
+      "Planet",
+      "Cluster",
+      "Space station",
+      "Microverse",
+      "TV",
+    ].map((item) => (
+      <button
+        key={item}
+        type="button"
+        className={`btn ${
+          type === item ? "btn-primary" : "btn-outline-primary"
+        }`}
+        onClick={() => {
+          setType(item);
+          setPage(1);
+        }}
+      >
+        {item === ""
+          ? "Todos"
+          : item === "Planet"
+          ? "Planeta"
+          : item === "Cluster"
+          ? "Cluster"
+          : item === "Space station"
+          ? "Estação espacial"
+          : item === "Microverse"
+          ? "Microverso"
+          : "TV"}
+      </button>
+    ))}
+  </div>
+</div>
 
       {error && (
 

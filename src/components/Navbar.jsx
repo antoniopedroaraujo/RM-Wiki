@@ -1,10 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
+import { Collapse } from "bootstrap";
 import { useFavorites } from "../context/useFavorites";
 import rickLogo from "../assets/rick.svg";
 
 function Navbar() {
 
-  const { favorites } = useFavorites();  
+  const { favorites } = useFavorites(); 
+  
+  const closeMenu = () => {
+    const navbar = document.getElementById("navbarNav");
+
+    if (navbar && navbar.classList.contains("show")) {
+      const bsCollapse = Collapse.getOrCreateInstance(navbar);
+      bsCollapse.hide();
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
@@ -29,6 +39,7 @@ function Navbar() {
             <li className="nav-item">
               <NavLink
                 to="/"
+                onClick={closeMenu}
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
@@ -40,6 +51,7 @@ function Navbar() {
             <li className="nav-item">
               <NavLink
                 to="/episodes"
+                onClick={closeMenu}
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
@@ -51,6 +63,7 @@ function Navbar() {
             <li className="nav-item">
               <NavLink
                 to="/locations"
+                onClick={closeMenu}
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }
@@ -62,6 +75,7 @@ function Navbar() {
             <li className="nav-item">
               <NavLink
                 to="/favorites"
+                onClick={closeMenu}
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active fw-bold" : ""}`
                 }

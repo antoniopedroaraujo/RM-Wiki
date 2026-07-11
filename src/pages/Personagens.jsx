@@ -93,7 +93,7 @@ function Personagens() {
 
     {/*BUSCA*/}
 
-    <div className="row mb-4">
+    <div className="row mb-4 justify-content-center">
 
   <div className="col-md-6">
 
@@ -138,46 +138,31 @@ function Personagens() {
 
     {/*FILTROS*/}
 
-    <div className="row mb-4">
+<div className="mb-4">
 
-  <div className="col-md-4">
-
-    <label className="form-label">
-      Status
-    </label>
-
-
-    <select
-      className="form-select"
-      value={status}
-      onChange={(e) => {
-
-        setStatus(e.target.value);
-        setPage(1);
-
-      }}
-    >
-
-      <option value="">
-        Todos
-      </option>
-
-      <option value="alive">
-        Vivo
-      </option>
-
-      <option value="dead">
-        Morto
-      </option>
-
-      <option value="unknown">
-        Desconhecido
-      </option>
-
-    </select>
-
+  <div className="d-flex flex-wrap gap-2 justify-content-center">
+    {["", "alive", "dead", "unknown"].map((item) => (
+      <button
+        key={item}
+        type="button"
+        className={`btn ${
+          status === item ? "btn-primary" : "btn-outline-primary"
+        }`}
+        onClick={() => {
+          setStatus(item);
+          setPage(1);
+        }}
+      >
+        {item === ""
+          ? "Todos"
+          : item === "alive"
+          ? "Vivo"
+          : item === "dead"
+          ? "Morto"
+          : "Desconhecido"}
+      </button>
+    ))}
   </div>
-
 </div>
 
 {error && (
