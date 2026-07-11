@@ -136,14 +136,21 @@ body {
     transition: .2s ease;
 }
 
-.btn-cartoon:hover {    
-    transform: translateY(-3px);
-    transform: scale(1.1);
-    box-shadow: 4px 4px 0 #000;
+@media (hover: hover) and (pointer: fine) {
+    .btn-cartoon:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 4px 4px 0 #000;
+    }
 }
 
 .btn-cartoon:active {
-    transform: translateY(0);
-    transform: scale(0.95);
+    transform: translateY(0) scale(0.95);
     box-shadow: none;
+}
+
+@media (hover: none) {
+  .btn-cartoon:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }

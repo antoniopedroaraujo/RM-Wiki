@@ -56,9 +56,11 @@ function PersonagemCard({ character }) {
           </p>
           <button
             className={`btn mt-auto btn-cartoon ${
-              isFavorite ? "btn-danger mt-auto" : "btn-outline-danger mt-auto"
+              isFavorite ? "btn-danger" : "btn-outline-danger"
             }`}
-            onClick={() => toggleFavorite(character)}
+            onClick={(e) => {toggleFavorite(character);
+              e.currentTarget.blur();
+            }}
           >
             {isFavorite ? "❤️ Remover" : "🤍 Favoritar"}
           </button>
