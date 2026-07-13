@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import './App.css'
+import "./App.css";
 
 import Personagens from "./pages/Personagens";
 import Episodios from "./pages/Episodios";
@@ -8,7 +8,6 @@ import Localizacoes from "./pages/Localizacoes";
 import Favoritos from "./pages/Favoritos";
 
 function App() {
-  
   return (
     <>
       <Navbar />
@@ -20,8 +19,7 @@ function App() {
         <Route path="/favorites" element={<Favoritos />} />
       </Routes>
     </>
-
-  )
+  );
 }
 
-export default App
+export default App;

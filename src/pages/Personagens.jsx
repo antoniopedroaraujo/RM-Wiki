@@ -4,7 +4,6 @@ import Loading from "../components/Loading";
 import Paginacao from "../components/Paginacao";
 
 function Personagens() {
-
   const [characters, setCharacters] = useState([]);
   const [status, setStatus] = useState("");
 
@@ -12,199 +11,142 @@ function Personagens() {
   const [searchName, setSearchName] = useState("");
 
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const searchInputRef = useRef(null);
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-
     async function getCharacters() {
+      setLoading(true);
+      setError("");
 
-    setLoading(true);
-    setError("");
+      try {
+        let url = `https://rickandmortyapi.com/api/character?page=${page}`;
 
-    try {
+        if (status !== "") {
+          url += `&status=${status}`;
+        }
 
-    let url = `https://rickandmortyapi.com/api/character?page=${page}`;
+        if (searchName !== "") {
+          url += `&name=${searchName}`;
+        }
 
-    if(status !== "") {
-      url += `&status=${status}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          setCharacters([]);
+          setTotalPages(1);
+          setError("Não foi possível carregar os personagens.");
+
+          return;
+        }
+
+        const data = await response.json();
+
+        setCharacters(data.results);
+        setTotalPages(data.info.pages);
+      } catch (error) {
+        console.log("Erro ao buscar personagens:", error);
+        setError("Ocorreu um erro ao buscar os personagens. Tente novamente.");
+      } finally {
+        setLoading(false);
+      }
     }
-
-    if (searchName !== "") {
-      url += `&name=${searchName}`;
-    }
-
-      const response = await fetch(url);
-
-      if (!response.ok) {
-
-      setCharacters([]);
-      setTotalPages(1);
-      setError("Não foi possível carregar os personagens.");
-
-      return;
-    }
-
-      const data = await response.json();
-
-      setCharacters(data.results);
-      setTotalPages(data.info.pages);
-
-    } catch (error) {
-
-      console.log("Erro ao buscar personagens:", error);
-      setError("Ocorreu um erro ao buscar os personagens. Tente novamente.");
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }
 
     getCharacters();
-
   }, [page, status, searchName]);
 
-
   useEffect(() => {
-    if(searchInputRef.current){
-
-    searchInputRef.current.focus();
-
-  }
-    }, []);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
 
   if (loading) {
     return <Loading />;
-}
+  }
 
   return (
     <div className="container mt-4">
+      <h1 className="page-title">Personagens</h1>
+      <p>Explore todos os personagens do universo Rick and Morty</p>
 
-    <h1 className="page-title">
-        Personagens
-    </h1>
-    <p>Explore todos os personagens do universo Rick and Morty</p>
+      {/*BUSCA*/}
 
-    {/*BUSCA*/}
+      <div className="row mb-4 justify-content-center">
+        <div className="col-md-6">
+          <label className="form-label">Buscar personagem</label>
 
-    <div className="row mb-4 justify-content-center">
+          <div className="input-group">
+            <input
+              ref={searchInputRef}
+              type="text"
+              className="form-control"
+              placeholder="Buscar por nome..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
 
-  <div className="col-md-6">
-
-    <label className="form-label">
-      Buscar personagem
-    </label>
-
-    <div className="input-group">
-
-
-      <input
-        ref={searchInputRef}
-        type="text"
-        className="form-control"
-        placeholder="Buscar por nome..."
-        value={search}
-
-        onChange={(e) =>
-          setSearch(e.target.value)
-        }
-      />
-
-      <button
-        className="btn btn-primary"
-
-        onClick={() => {
-
-          setPage(1);
-          setSearchName(search);
-
-        }}
-      >
-
-        Pesquisar
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-    {/*FILTROS*/}
-
-<div className="mb-4">
-
-  <div className="d-flex flex-wrap gap-2 justify-content-center">
-    {["", "alive", "dead", "unknown"].map((item) => (
-      <button
-        key={item}
-        type="button"
-        className={`btn ${
-          status === item ? "btn-primary" : "btn-outline-primary"
-        }`}
-        onClick={() => {
-          setStatus(item);
-          setPage(1);
-        }}
-      >
-        {item === ""
-          ? "Todos"
-          : item === "alive"
-          ? "Vivo"
-          : item === "dead"
-          ? "Morto"
-          : "Desconhecido"}
-      </button>
-    ))}
-  </div>
-</div>
-
-{error && (
-
-  <div className="alert alert-danger mt-4">
-    {error}
-  </div>
-
-  )}
-
-{/*CARDS*/}
-
-  {
-  characters.length === 0 && !error ? (
-
-    <div className="alert alert-info mt-4">
-      Nenhum personagem foi encontrado.
-    </div>
-
-  ) : (
-
-      <div className="row">
-
-        {characters.map((character) => (
-
-          <PersonagemCard
-            key={character.id}
-            character={character}
-          />
-
-        ))}
-
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                setPage(1);
+                setSearchName(search);
+              }}
+            >
+              Pesquisar
+            </button>
+          </div>
+        </div>
       </div>
-    )
-  }
 
-<Paginacao
-  page={page}
-  totalPages={totalPages}
-  setPage={setPage}
-/>
+      {/*FILTROS*/}
 
+      <div className="mb-4">
+        <div className="d-flex flex-wrap gap-2 justify-content-center">
+          {["", "alive", "dead", "unknown"].map((item) => (
+            <button
+              key={item}
+              type="button"
+              className={`btn ${
+                status === item ? "btn-primary" : "btn-outline-primary"
+              }`}
+              onClick={() => {
+                setStatus(item);
+                setPage(1);
+              }}
+            >
+              {item === ""
+                ? "Todos"
+                : item === "alive"
+                  ? "Vivo"
+                  : item === "dead"
+                    ? "Morto"
+                    : "Desconhecido"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {error && <div className="alert alert-danger mt-4">{error}</div>}
+
+      {/*CARDS*/}
+
+      {characters.length === 0 && !error ? (
+        <div className="alert alert-info mt-4">
+          Nenhum personagem foi encontrado.
+        </div>
+      ) : (
+        <div className="row">
+          {characters.map((character) => (
+            <PersonagemCard key={character.id} character={character} />
+          ))}
+        </div>
+      )}
+
+      <Paginacao page={page} totalPages={totalPages} setPage={setPage} />
     </div>
   );
 }

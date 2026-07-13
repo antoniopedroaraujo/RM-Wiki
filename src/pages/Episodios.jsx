@@ -4,154 +4,117 @@ import Loading from "../components/Loading";
 import Paginacao from "../components/Paginacao";
 
 function Episodios() {
-
   const [episodes, setEpisodes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [season, setSeason] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     async function getEpisodes() {
+      try {
+        setLoading(true);
+        setError("");
 
-    try {
+        let allEpisodes = [];
+        let currentPage = 1;
+        let hasNext = true;
 
-      setLoading(true);
-      setError("");
+        while (hasNext) {
+          const response = await fetch(
+            `https://rickandmortyapi.com/api/episode?page=${currentPage}`,
+          );
 
-      let allEpisodes = [];
-      let currentPage = 1;
-      let hasNext = true;
+          if (!response.ok) {
+            setEpisodes([]);
+            setTotalPages(1);
+            setError("Não foi possível carregar os episódios.");
+            return;
+          }
 
-    while (hasNext) {
+          const data = await response.json();
 
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/episode?page=${currentPage}`
-      );
+          allEpisodes = [...allEpisodes, ...data.results];
 
-    if (!response.ok) {
-      setEpisodes([]);
-      setTotalPages(1);
-      setError("Não foi possível carregar os episódios.");
-      return;
-    }
+          hasNext = data.info.next !== null;
+          currentPage++;
+        }
 
-    const data = await response.json();
+        let result = allEpisodes;
 
-    allEpisodes = [...allEpisodes, ...data.results];
+        // filtro por temporada
+        if (season !== "") {
+          result = result.filter((episode) =>
+            episode.episode.startsWith(`S0${season}`),
+          );
+        }
 
-    hasNext = data.info.next !== null;
-    currentPage++;
-}
+        const itemsPerPage = 20;
 
-      let result = allEpisodes;
+        setTotalPages(Math.ceil(result.length / itemsPerPage));
 
-      // filtro por temporada
-      if(season !== "") {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
 
-        result = result.filter((episode)=>
-
-          episode.episode.startsWith(
-            `S0${season}`
-          )
-        );
+        setEpisodes(result.slice(start, end));
+      } catch (error) {
+        console.log(error);
+        setError("Ocorreu um erro ao buscar os episódios. Tente novamente.");
+      } finally {
+        setLoading(false);
       }
-
-      const itemsPerPage = 20;
-
-      setTotalPages(Math.ceil(result.length / itemsPerPage));
-
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-
-      setEpisodes(result.slice(start, end));
-
-    } catch(error) {
-
-      console.log(error);
-       setError("Ocorreu um erro ao buscar os episódios. Tente novamente.");
-
-    } finally {
-      setLoading(false);
     }
-
-  }
 
     getEpisodes();
-  },[page, season]);
+  }, [page, season]);
 
   if (loading) {
     return <Loading />;
   }
 
   return (
-
     <div className="container mt-4">
-      <h1 className="page-title">
-        Episódios
-      </h1>
+      <h1 className="page-title">Episódios</h1>
       <p>Todos os episódios do universo Rick and Morty</p>
       {/* FILTRO */}
 
-    <div className="mb-4">
-
-  <div className="d-flex flex-wrap gap-2 justify-content-center">
-    {["", "1", "2", "3", "4", "5"].map((item) => (
-      <button
-        key={item}
-        type="button"
-        className={`btn ${
-          season === item ? "btn-primary" : "btn-outline-primary"
-        }`}
-        onClick={() => {
-          setSeason(item);
-          setPage(1);
-        }}
-      >
-        {item === "" ? "Todas" : `T${item}`}
-      </button>
-    ))}
-  </div>
-</div>
-
-    {error && (
-
-      <div className="alert alert-danger mt-4">
-        {error}
+      <div className="mb-4">
+        <div className="d-flex flex-wrap gap-2 justify-content-center">
+          {["", "1", "2", "3", "4", "5"].map((item) => (
+            <button
+              key={item}
+              type="button"
+              className={`btn ${
+                season === item ? "btn-primary" : "btn-outline-primary"
+              }`}
+              onClick={() => {
+                setSeason(item);
+                setPage(1);
+              }}
+            >
+              {item === "" ? "Todas" : `T${item}`}
+            </button>
+          ))}
+        </div>
       </div>
 
-    )}
+      {error && <div className="alert alert-danger mt-4">{error}</div>}
 
       {/* CARDS */}
 
-      {
-      episodes.length === 0 && !error ? (
-
+      {episodes.length === 0 && !error ? (
         <div className="alert alert-info mt-4">
           Nenhum episódio foi encontrado.
         </div>
-
-        ) : (
-
-      <div className="row">
-
-        {episodes.map((episode)=>(
-
-          <EpisodioCard
-
-            key={episode.id}
-            episode={episode}
-          />
-        ))}
-      </div>
-      )
-    }
-      <Paginacao
-        page={page}
-        totalPages={totalPages}
-        setPage={setPage}
-      />
+      ) : (
+        <div className="row">
+          {episodes.map((episode) => (
+            <EpisodioCard key={episode.id} episode={episode} />
+          ))}
+        </div>
+      )}
+      <Paginacao page={page} totalPages={totalPages} setPage={setPage} />
     </div>
   );
 }

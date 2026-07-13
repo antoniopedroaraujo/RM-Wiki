@@ -5,15 +5,14 @@ body {
 .logo {
   font-family: "Bangers", cursive;
   font-size: clamp(1.5rem, 5vw, 2rem);
-  -webkit-text-stroke:2px #111;
-  letter-spacing:1.5px;
-  transition:.3s;
-
+  -webkit-text-stroke: 2px #111;
+  letter-spacing: 1.5px;
+  transition: 0.3s;
 }
 
-@media (min-width:992px){
-  .logo{
-    font-size:2.5rem;
+@media (min-width: 992px) {
+  .logo {
+    font-size: 2.5rem;
   }
 }
 
@@ -25,17 +24,19 @@ body {
 .nav-link {
   font-family: "Luckiest Guy", cursive;
   font-size: clamp(1rem, 2vw, 1.3rem);
-  color:white !important;
-  letter-spacing:1px;
-  transition: color .2s ease, transform .2s ease;
+  color: white !important;
+  letter-spacing: 1px;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .nav-link:hover {
-  color:#FFD93D !important;
-  transform:translateY(-2px);
+  color: #ffd93d !important;
+  transform: translateY(-2px);
 }
 
 .navbar {
@@ -43,21 +44,21 @@ body {
   z-index: 1050;
   min-height: 76px;
   background-color: #222235;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@media (min-width:992px) {
-  .navbar{
+@media (min-width: 992px) {
+  .navbar {
     height: 76px;
   }
 }
 
 .navbar .container {
-    height: 100%;
-    align-items: center;
+  height: 100%;
+  align-items: center;
 }
 
 @media (max-width: 991px) {
@@ -87,65 +88,63 @@ body {
 }
 
 .page-title {
-    font-family:"Luckiest Guy", cursive;
-    font-size:clamp(2rem, 5vw, 3.5rem);
-    letter-spacing:2px;
-    margin-bottom:1.5rem;
+  font-family: "Luckiest Guy", cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
 }
 
 .cartoon-card {
-    background-color: #222235;
-    border: 3px solid #B967FF;
-    border-radius: 18px;
-    overflow: hidden;
-    color: white;
-    transition: .3s ease;
+  background-color: #222235;
+  border: 3px solid #b967ff;
+  border-radius: 18px;
+  overflow: hidden;
+  color: white;
+  transition: 0.3s ease;
 }
 
 .cartoon-card:hover {
-    transform:
-      translateY(-8px);
-    box-shadow:
-       6px 6px 0 #000 !important;
+  transform: translateY(-8px);
+  box-shadow: 6px 6px 0 #000 !important;
 }
 
 /* Remove o comportamento padrão do Bootstrap */
 .cartoon-card .card-body {
-    padding: 1.5rem;
+  padding: 1.5rem;
 }
 
 .cartoon-card .card-title {
-    font-family: "Luckiest Guy", cursive;
-    font-size: 1.7rem;
-    text-shadow:2px 2px 0 #000;
+  font-family: "Luckiest Guy", cursive;
+  font-size: 1.7rem;
+  text-shadow: 2px 2px 0 #000;
 }
 
 .cartoon-card .card-text {
-    color: #ddd;
-    line-height: 1.6;
+  color: #ddd;
+  line-height: 1.6;
 }
 
 .character-card {
-    border-color: #FFD93D;
+  border-color: #ffd93d;
 }
 
 .btn-cartoon {
-    border: 3px solid #000 !important;
-    border-radius: 20px;
-    padding: .6rem 1.5rem;
-    transition: .2s ease;
+  border: 3px solid #000 !important;
+  border-radius: 20px;
+  padding: 0.6rem 1.5rem;
+  transition: 0.2s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .btn-cartoon:hover {
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 4px 4px 0 #000;
-    }
+  .btn-cartoon:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 4px 4px 0 #000;
+  }
 }
 
 .btn-cartoon:active {
-    transform: translateY(0) scale(0.95);
-    box-shadow: none;
+  transform: translateY(0) scale(0.95);
+  box-shadow: none;
 }
 
 @media (hover: none) {

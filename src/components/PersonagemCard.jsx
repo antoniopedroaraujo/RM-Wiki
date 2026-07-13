@@ -1,10 +1,7 @@
 import { useFavorites } from "../context/useFavorites";
 
 function PersonagemCard({ character }) {
-    const {
-    favorites,
-    toggleFavorite
-    } = useFavorites();
+  const { favorites, toggleFavorite } = useFavorites();
 
   const isFavorite = favorites.some((fav) => fav.id === character.id);
 
@@ -58,7 +55,8 @@ function PersonagemCard({ character }) {
             className={`btn mt-auto btn-cartoon ${
               isFavorite ? "btn-danger" : "btn-outline-danger"
             }`}
-            onClick={(e) => {toggleFavorite(character);
+            onClick={(e) => {
+              toggleFavorite(character);
               e.currentTarget.blur();
             }}
           >
