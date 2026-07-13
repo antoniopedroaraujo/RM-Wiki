@@ -20,10 +20,14 @@ function Localizacoes() {
 
     try {
 
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/location?page=${page}`
-      );
-
+      let url = `https://rickandmortyapi.com/api/location?page=${page}`;
+      
+      if (type !== "") {
+        url += `&type=${encodeURIComponent(type)}`;
+       }
+      
+      const response = await fetch(url);
+      
       if (!response.ok) {
         setLocations([]);
         setTotalPages(1);
@@ -37,14 +41,13 @@ function Localizacoes() {
       let result = data.results;
 
       // filtro por tipo
-      if(type !== "") {
+      /*if(type !== "") {
 
         result = result.filter(
 
           (location) => location.type === type
         );
-      }
-
+      }*/
       setLocations(result);
       setTotalPages(data.info.pages);
 
