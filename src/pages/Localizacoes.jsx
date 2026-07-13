@@ -40,14 +40,6 @@ function Localizacoes() {
 
       let result = data.results;
 
-      // filtro por tipo
-      /*if(type !== "") {
-
-        result = result.filter(
-
-          (location) => location.type === type
-        );
-      }*/
       setLocations(result);
       setTotalPages(data.info.pages);
 

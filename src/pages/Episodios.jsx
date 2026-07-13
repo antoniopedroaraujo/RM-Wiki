@@ -20,22 +20,32 @@ function Episodios() {
       setLoading(true);
       setError("");
 
-      let url =
-      `https://rickandmortyapi.com/api/episode?page=${page}`;
+      let allEpisodes = [];
+      let currentPage = 1;
+      let hasNext = true;
 
-      const response = await fetch(url);
+    while (hasNext) {
 
-      if (!response.ok) {
-        setEpisodes([]);
-        setTotalPages(1);
-        setError("Não foi possível carregar os episódios.");
+      const response = await fetch(
+        `https://rickandmortyapi.com/api/episode?page=${currentPage}`
+      );
 
-        return;
-      }
+    if (!response.ok) {
+      setEpisodes([]);
+      setTotalPages(1);
+      setError("Não foi possível carregar os episódios.");
+      return;
+    }
 
-      const data = await response.json();
+    const data = await response.json();
 
-      let result = data.results;
+    allEpisodes = [...allEpisodes, ...data.results];
+
+    hasNext = data.info.next !== null;
+    currentPage++;
+}
+
+      let result = allEpisodes;
 
       // filtro por temporada
       if(season !== "") {
@@ -48,8 +58,14 @@ function Episodios() {
         );
       }
 
-      setEpisodes(result);
-      setTotalPages(data.info.pages);
+      const itemsPerPage = 20;
+
+      setTotalPages(Math.ceil(result.length / itemsPerPage));
+
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+
+      setEpisodes(result.slice(start, end));
 
     } catch(error) {
 
