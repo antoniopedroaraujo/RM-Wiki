@@ -1,4 +1,10 @@
-function Paginacao({ page, totalPages, setPage }) {
+interface PaginacaoProps {
+  page: number;
+  totalPages: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function Paginacao({ page, totalPages, setPage }: PaginacaoProps) {
   return (
     <nav className="mt-4">
       <div className="d-flex justify-content-center align-items-center gap-3">

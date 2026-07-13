@@ -3,11 +3,17 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./scss/styles.scss";
 import "bootstrap";
-import App from "./App.jsx";
-import { FavoritesProvider } from "./context/FavoritesProvider.jsx";
+import App from "./App";
+import { FavoritesProvider } from "./context/FavoritesProvider";
 import { BrowserRouter } from "react-router-dom";
 
-createRoot(document.getElementById("root")).render(
+const root = document.getElementById("root");
+
+if (!root) {
+  throw new Error("Elemento root não encontrado");
+}
+
+createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
       <FavoritesProvider>
